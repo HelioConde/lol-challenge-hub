@@ -1,31 +1,46 @@
-# LoL Challenge Hub
+<div align="center">
+  <h1>🧪 LoL Challenge Hub</h1>
+  <p><strong>Um painel pessoal para transformar os desafios do jogo em metas de curto prazo e acompanhar o progresso sem perder o contexto.</strong></p>
+  <p><img alt="Status" src="https://img.shields.io/badge/status-concep%C3%A7%C3%A3o-64748b"></p>
+</div>
 
-**Ideia de produto independente para League of Legends: transformar desafios do jogo em metas e coleções acompanháveis.**
+> **Projeto em concepção — documentação apenas.** O repositório ainda não contém frontend, backend ou aplicativo executável. O fluxo abaixo é um plano de produto, não uma funcionalidade disponível.
 
-![Status](https://img.shields.io/badge/status-concepção-64748b)
+## Problema
 
-## O problema que queremos resolver
-
-Ferramentas genéricas mostram muitos números, mas nem sempre ajudam o jogador a transformar seu histórico ou suas anotações em uma próxima ação clara. O objetivo deste projeto é construir uma experiência especializada e fácil de usar.
+Ao alternar entre vários desafios, o jogador pode perder de vista quais conquistas quer priorizar e por que escolheu cada uma.
 
 ## Experiência proposta
 
-Escolher um desafio, registrar objetivos, acompanhar marcos e visualizar evolução.
+Escolher desafios → definir prioridade e objetivo → registrar progresso ou importar um dado disponível → revisar marcos atingidos.
 
-## Estado atual
+## Dados mínimos do primeiro protótipo
 
-**Somente planejamento:** nesta revisão, o repositório contém documentação, sem aplicação ou serviço executável. O fluxo descrito acima é **uma proposta**, não uma funcionalidade já entregue.
+ID/nome do desafio, prioridade, meta, progresso, última atualização e observações.
 
-## Primeiro marco
+## MVP planejado
 
-Criar um modelo de desafio e uma primeira tela de progresso.
+Uma lista de desafios editável, ficha individual, marcação de progresso e persistência local.
 
-Antes de expandir, o MVP deve demonstrar seu fluxo principal, funcionar em dispositivos móveis e ter testes básicos. Integrações, autenticação e persistência serão decididas conforme a necessidade real, sem prometer suporte antecipadamente.
+**Critério para considerar o MVP útil:** Um jogador consegue acompanhar três objetivos distintos, registrar atualizações e recuperar tudo após recarregar a página.
 
-## Portfólio e referências
+## Limites e dependências
 
-Este experimento integra o [Ideias IA Lab](https://github.com/HelioConde/ideias-ia-lab). O código do produto deve permanecer neste repositório quando o desenvolvimento começar.
+Consultar automaticamente o progresso real dependeria da cobertura autorizada da Riot API; não assumir acesso a dados que o serviço não fornece.
 
-> League of Legends e seus elementos pertencem aos respectivos titulares. Este é um projeto independente, não oficial.
+A implementação deve começar com **dados demonstrativos identificados e armazenamento local**, se adequado. Integrações externas, autenticação e anúncios exigem revisão própria; não serão anunciados como funcionais antes de existirem.
+
+## Próximo passo
+
+1. Desenhar uma tela com o fluxo principal.
+2. Implementar um protótipo pequeno que funcione no celular.
+3. Testar navegação, salvar/recuperar dados e tratamento de casos vazios.
+4. Pedir feedback de usuários antes de ampliar o escopo.
+
+## Projetos relacionados
+
+Este conceito faz parte do [Ideias IA Lab](https://github.com/HelioConde/ideias-ia-lab). Explore [outros repositórios de Hélio Conde](https://github.com/HelioConde?tab=repositories).
+
+*League of Legends pertence aos seus respectivos titulares. Projeto independente, sem afiliação oficial.*
 
 Autor: [Hélio Conde](https://github.com/HelioConde).
