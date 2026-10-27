@@ -1,46 +1,30 @@
-<div align="center">
-  <h1>🧪 LoL Challenge Hub</h1>
-  <p><strong>Um painel pessoal para transformar os desafios do jogo em metas de curto prazo e acompanhar o progresso sem perder o contexto.</strong></p>
-  <p><img alt="Status" src="https://img.shields.io/badge/status-concep%C3%A7%C3%A3o-64748b"></p>
-</div>
+# ✦ LoL Challenge Hub — MVP estático
 
-> **Projeto em concepção — documentação apenas.** O repositório ainda não contém frontend, backend ou aplicativo executável. O fluxo abaixo é um plano de produto, não uma funcionalidade disponível.
+Painel pessoal para definir, revisar e acompanhar desafios de League of Legends **manualmente**. Não há conexão com Riot API, login, servidor ou banco de dados.
 
-## Problema
+## Funcionalidades entregues
+- Criar desafios com nome, prioridade, meta, progresso e observação.
+- Acompanhar metas em andamento/concluídas, avançar +1, editar, excluir após confirmação e filtrar.
+- Progresso salvo em LocalStorage no navegador.
+- Três exemplos **fictícios e identificados**, carregados somente por escolha explícita.
+- Importar/exportar backup JSON com validação; até 100 desafios por navegador.
+- Interfaces responsivas e acessíveis, com controles semânticos, foco e movimento reduzido.
 
-Ao alternar entre vários desafios, o jogador pode perder de vista quais conquistas quer priorizar e por que escolheu cada uma.
+## GitHub Pages
+Arquivos públicos: `index.html`, `styles.css`, `app.js`, `favicon.svg`, `.nojekyll`. Não requer build nem banco de dados. Caminhos são relativos para suportar `/lol-challenge-hub/`.
 
-## Experiência proposta
+Fonte recomendada: Settings → Pages → Deploy from a branch → `gh-pages` → `/(root)`. A publicação só pode ser confirmada quando a configuração do repositório estiver habilitada e a URL HTTP responder.
 
-Escolher desafios → definir prioridade e objetivo → registrar progresso ou importar um dado disponível → revisar marcos atingidos.
+## Rodar localmente
+```bash
+python -m http.server 8000
+```
+Abrir `http://localhost:8000`.
 
-## Dados mínimos do primeiro protótipo
+## QA
+`node tests/static-qa.cjs` para verificações sem dependências; `.github/workflows/quality.yml` inclui Playwright Chromium com screenshots em cinco viewports, validação de formulário, progresso e persistência.
 
-ID/nome do desafio, prioridade, meta, progresso, última atualização e observações.
+## Histórico
+O README de concepção original está preservado na branch `archive/README-only-20261027`. Decisões e referências em [docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md).
 
-## MVP planejado
-
-Uma lista de desafios editável, ficha individual, marcação de progresso e persistência local.
-
-**Critério para considerar o MVP útil:** Um jogador consegue acompanhar três objetivos distintos, registrar atualizações e recuperar tudo após recarregar a página.
-
-## Limites e dependências
-
-Consultar automaticamente o progresso real dependeria da cobertura autorizada da Riot API; não assumir acesso a dados que o serviço não fornece.
-
-A implementação deve começar com **dados demonstrativos identificados e armazenamento local**, se adequado. Integrações externas, autenticação e anúncios exigem revisão própria; não serão anunciados como funcionais antes de existirem.
-
-## Próximo passo
-
-1. Desenhar uma tela com o fluxo principal.
-2. Implementar um protótipo pequeno que funcione no celular.
-3. Testar navegação, salvar/recuperar dados e tratamento de casos vazios.
-4. Pedir feedback de usuários antes de ampliar o escopo.
-
-## Projetos relacionados
-
-Este conceito faz parte do [Ideias IA Lab](https://github.com/HelioConde/ideias-ia-lab). Explore [outros repositórios de Hélio Conde](https://github.com/HelioConde?tab=repositories).
-
-*League of Legends pertence aos seus respectivos titulares. Projeto independente, sem afiliação oficial.*
-
-Autor: [Hélio Conde](https://github.com/HelioConde).
+League of Legends pertence aos seus respectivos titulares. Projeto independente, não afiliado à Riot Games.
