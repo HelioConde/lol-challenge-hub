@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark"><meta name="theme-color" content="#0e1527">
+  <meta name="description" content="LoL Challenge Hub: organize desafios pessoais, registre metas e progresso manualmente. App estático sem login nem banco de dados.">
+  <meta property="og:title" content="LoL Challenge Hub — seu progresso, sua jornada">
+  <meta property="og:description" content="Painel local para acompanhar objetivos pessoais de League of Legends, sem conexão com a API Riot.">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+  <title>LoL Challenge Hub — metas e evolução</title>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header">
+    <div class="shell navigation">
+      <a href="./" class="brand" aria-label="LoL Challenge Hub, início"><span class="mark" aria-hidden="true">✦</span><span>CHALLENGE <strong>HUB</strong><small>SEU PAINEL DE DESAFIOS</small></span></a>
+      <nav aria-label="Menu principal"><a href="#desafios">Meus desafios</a><a href="#novo">Adicionar</a></nav>
+      <span class="mode-badge">LOCAL · SEM CONTA</span>
+    </div>
+  </header>
+  <main id="conteudo">
+    <section class="hero shell" aria-labelledby="title">
+      <div class="hero-text">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> SEU PROGRESSO, SEU RITMO</p>
+        <h1 id="title">Toda conquista começa com <span>um desafio.</span></h1>
+        <p>Escolha suas próximas metas, registre o progresso manualmente e acompanhe cada passo. Um espaço seu, feito para evoluir junto com suas partidas.</p>
+        <div class="hero-actions"><a href="#novo" class="button primary">Criar desafio <span aria-hidden="true">↗</span></a><a href="#desafios" class="button secondary">Ver minhas metas ↓</a></div>
+        <p class="disclaimer">Ferramenta independente, sem integração Riot. Os números são inseridos por você e salvos apenas neste navegador.</p>
+      </div>
+      <div class="hero-art" role="img" aria-label="Ilustração abstrata de um emblema de conquista em fundo azul escuro">
+        <div class="orbit outer" aria-hidden="true"></div><div class="orbit inner" aria-hidden="true"></div>
+        <div class="emblem" aria-hidden="true"><span>✦</span><small>PRÓXIMO NÍVEL</small></div>
+        <span class="art-decoration deco-one" aria-hidden="true">✧</span><span class="art-decoration deco-two" aria-hidden="true">◇</span>
+      </div>
+    </section>
+    <section class="shell stats" aria-label="Resumo das suas metas">
+      <div><span>DESAFIOS</span><strong id="stat-total">0</strong><small>Criados neste navegador</small></div>
+      <div><span>EM ANDAMENTO</span><strong id="stat-active">0</strong><small>Metas ainda abertas</small></div>
+      <div><span>CONCLUÍDOS</span><strong id="stat-done">0</strong><small>Objetivos alcançados</small></div>
+    </section>
+    <section id="desafios" class="shell challenges-section" aria-labelledby="challenges-title">
+      <div class="section-title"><div><p class="eyebrow">PAINEL DE PROGRESSO</p><h2 id="challenges-title">Seus desafios</h2><p>Os resultados são registros pessoais, não estatísticas verificadas pela Riot.</p></div><div class="data-actions"><button id="export-data" type="button">Exportar JSON</button><button id="import-data" type="button">Importar JSON</button><input id="import-file" class="visually-hidden" type="file" accept=".json,application/json" aria-label="Selecionar arquivo JSON para importar"></div></div>
+      <div class="filters" role="group" aria-label="Filtrar desafios"><button type="button" data-filter="all" aria-pressed="true">Todos</button><button type="button" data-filter="active" aria-pressed="false">Em andamento</button><button type="button" data-filter="done" aria-pressed="false">Concluídos</button></div>
+      <p id="results" role="status" aria-live="polite" class="results">Nenhum desafio ainda.</p>
+      <div id="challenge-list" class="challenge-grid" aria-label="Lista de desafios"></div>
+      <div id="empty" class="empty">
+        <span aria-hidden="true">✦</span><h3>Seu próximo objetivo começa aqui.</h3>
+        <p>Crie um desafio pessoal ou carregue exemplos claramente identificados para explorar a interface.</p>
+        <button type="button" id="load-demo" class="button secondary">Carregar exemplos demonstrativos</button>
+      </div>
+    </section>
+    <section id="novo" class="editor-band" aria-labelledby="form-title">
+      <div class="shell editor-layout">
+        <div class="editor-intro"><p class="eyebrow">PRÓXIMA CONQUISTA</p><h2 id="form-title">Planeje o que você quer <span>alcançar.</span></h2><p>Defina uma meta alcançável e atualize manualmente após cada sessão. Seus dados ficam no armazenamento deste dispositivo.</p><p class="privacy-note"><strong>Privacidade:</strong> não temos contas nem sincronização. Exporte JSON antes de limpar o navegador ou trocar de aparelho.</p></div>
+        <form id="challenge-form" class="editor-form">
+          <input id="editing-id" type="hidden">
+          <div class="input-group"><label for="challenge-title">Nome do desafio</label><input id="challenge-title" name="challenge-title" maxlength="70" placeholder="Ex.: completar 10 partidas" required></div>
+          <div class="form-row"><div class="input-group"><label for="priority">Prioridade</label><select id="priority"><option value="high">Alta</option><option value="medium" selected>Média</option><option value="low">Baixa</option></select></div><div class="input-group"><label for="goal">Meta total</label><input id="goal" type="number" min="1" max="10000" step="1" value="10" required></div></div>
+          <div class="input-group"><label for="progress">Progresso atual</label><input id="progress" type="number" min="0" max="10000" step="1" value="0" required></div>
+          <div class="input-group"><label for="notes">Observações (opcional)</label><textarea id="notes" rows="3" maxlength="500" placeholder="Por que esta meta é importante para você?"></textarea></div>
+          <div class="form-actions"><button type="submit" id="save" class="button primary">Salvar desafio</button><button type="button" id="cancel-edit" class="button secondary" hidden>Cancelar edição</button></div>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><div class="shell footer-content"><p>LoL Challenge Hub · MVP local e independente · Sem banco de dados.</p><p>League of Legends é marca de seus respectivos titulares. Projeto independente, sem afiliação oficial à Riot Games.</p><a href="https://github.com/HelioConde/lol-challenge-hub" target="_blank" rel="noopener noreferrer">Código no GitHub ↗</a></div></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
