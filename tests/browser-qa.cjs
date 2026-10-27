@@ -7,7 +7,7 @@ const server=spawn("python3",["-m","http.server","8769","--bind","127.0.0.1"],{s
 const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 (async()=>{
  await wait(1100);
- const browser=await chromium.launch({headless:true}),results=[];
+ const browser=await chromium.launch(process.env.BROWSER_CHANNEL==='chrome'?{headless:true,channel:'chrome'}:{headless:true}),results=[];
  const sizes=[{width:320,height:568},{width:390,height:844},{width:768,height:1024},{width:1366,height:768},{width:1600,height:900}];
  try{
   for(const viewport of sizes){
