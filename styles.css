@@ -10,3 +10,13 @@
 @media(max-width:950px){.hero{grid-template-columns:1fr;padding-block:65px;gap:26px}.hero-art{min-height:320px;max-width:560px;width:100%;margin:auto}.editor-layout{grid-template-columns:1fr;gap:20px}.section-title{align-items:start;flex-direction:column;gap:10px}}
 @media(max-width:640px){.shell{width:calc(100% - 30px)}.navigation{min-height:72px;gap:12px}.brand{font-size:12px}.mark{width:37px;height:37px}.navigation nav{display:none}.mode-badge{margin-left:auto;padding:6px 8px;font-size:8px}.hero{padding-block:43px 50px}.hero h1{font-size:clamp(42px,12vw,59px)}.hero-text>p:nth-of-type(2){font-size:15px}.hero-art{min-height:270px;border-radius:25px}.emblem{width:155px;height:155px}.emblem span{font-size:78px}.stats{gap:0;padding:14px 5px}.stats>div{padding:6px 4px}.stats strong{font-size:27px}.stats span{font-size:8px}.stats small{font-size:9px}.challenges-section{padding-block:60px}.challenge-grid{grid-template-columns:1fr}.challenge-card{padding:20px}.editor-band{padding-block:55px}.editor-form{padding:20px 15px}.footer-content{display:grid}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* Small phones: keep brand and mode badge within the header without overflow. */
+@media(max-width:380px){
+  .navigation{gap:5px}
+  .brand{gap:6px;font-size:10px;letter-spacing:0}
+  .brand small{font-size:7px;letter-spacing:.08em}
+  .mark{width:29px;height:29px;border-radius:8px;font-size:18px;flex-shrink:0}
+  .mode-badge{padding:5px;font-size:7px;letter-spacing:0}
+  .stats>div{min-width:0}
+}
