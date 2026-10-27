@@ -44,7 +44,10 @@ const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
     page.once("dialog",d=>d.accept());
     await created.getByRole("button",{name:"Excluir"}).click();
     if(await page.locator(".challenge-card").count()!==3)errors.push("Exclusão não funcionou");
-    if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2))errors.push("Overflow horizontal");
+    if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2)){
+      const offenders=await page.evaluate(()=>[...document.querySelectorAll("body *")].filter(el=>el.getBoundingClientRect().right>innerWidth+2&&getComputedStyle(el).position!=="fixed").slice(0,8).map(el=>el.tagName.toLowerCase()+"."+(el.className?.baseVal||el.className||"").toString().replaceAll(" ",".")));
+      errors.push("Overflow horizontal: "+offenders.join(", "));
+    }
     await page.screenshot({path:"screenshots/"+viewport.width+"x"+viewport.height+".png",fullPage:true,animations:"disabled"});
     results.push({viewport,passed:errors.length===0,errors});
    }catch(e){errors.push(e.stack||String(e));results.push({viewport,passed:false,errors})}
