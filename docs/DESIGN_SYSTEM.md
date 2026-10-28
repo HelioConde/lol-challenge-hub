@@ -38,3 +38,6 @@ Testes diretos no Chrome/Playwright de Tab/Shift+Tab, foco visível, acesso ráp
 
 ## Menu móvel nativo (28/10/2026)
 Header com navegação acessível por `details/summary` em até 640 px, sem necessidade de framework. Atalhos: Mapa de missões, Meus desafios, Criar missão. Abre com Enter, fecha com Escape, clique em link e clique fora. Desativa na largura desktop. Mantém backup e funcionalidades. Playwright verifica o menu em cinco larguras, navegação e fechamento.
+
+## Navegação desktop contextual (28/10/2026)
+Atalhos de desktop específicos de missões: Mapa de missões, Desafios, Criar missão. Testes Playwright verificam os três destinos e o clique na primeira âncora em 768/1366/1600px; mobile permanece com seu menu nativo. Header de até 990px esconde badge secundário para não causar overflow.
