@@ -1,0 +1,8 @@
+/* Desktop quest ledger navigation, keeping mobile menu independent. */
+@media(min-width:641px){
+.site-header .navigation{gap:clamp(10px,2vw,28px)}
+.site-header .navigation>nav:not(.mobile-nav-panel){display:flex;align-items:center;gap:clamp(4px,1vw,16px);min-width:0;margin-left:auto}
+.site-header .navigation>nav>a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:4px clamp(6px,1vw,12px);font:850 clamp(11px,1.25vw,14px) system-ui;color:#fff7da;white-space:nowrap;text-decoration:none}
+.site-header .navigation>nav>a:hover{box-shadow:inset 0 -3px 0 #e9b76d;background:#f3d1911c}
+}
+@media(min-width:641px) and (max-width:990px){.site-header .mode-badge{display:none}.site-header .brand{max-width:46%;white-space:normal}}
