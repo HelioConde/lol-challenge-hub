@@ -20,6 +20,18 @@ const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
     const response=await page.goto("http://127.0.0.1:8769/",{waitUntil:"load"});
     if(response.status()!==200)errors.push("Home HTTP "+response.status());
     await page.getByRole("heading",{name:/Toda conquista começa/}).waitFor();
+    // Keyboard-only skip link must remain visually clipped when not focused, then reveal on focus.
+    const skip=page.locator("a.skip,a.skip-link");
+    if(await skip.count()!==1)errors.push("Missing unique keyboard skip link");
+    else{
+      const before=await skip.evaluate(el=>getComputedStyle(el).clipPath);
+      if(!before.includes("inset"))errors.push("Skip link not clipped at rest");
+      await skip.focus();
+      const visible=await skip.evaluate(el=>getComputedStyle(el).clipPath);
+      if(visible!=="none")errors.push("Focused skip link not revealed");
+      await skip.evaluate(el=>el.blur());
+    }
+
     if(await page.locator(".challenge-card").count()!==0)errors.push("A primeira visita deveria estar vazia");
     await page.getByRole("button",{name:"Carregar exemplos demonstrativos"}).click();
     if(await page.locator(".challenge-card").count()!==3)errors.push("Não carregou três exemplos");
