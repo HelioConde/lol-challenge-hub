@@ -46,10 +46,36 @@
     article.append(controls);
     return article;
   }
+  function renderQuestMap(){
+    const target=$("#quest-map");target.replaceChildren();
+    const stages=[
+      {id:"new",title:"A iniciar",matches:item=>item.progress===0},
+      {id:"active",title:"Em jornada",matches:item=>item.progress>0&&item.progress<item.goal},
+      {id:"done",title:"Conquistas",matches:item=>item.progress>=item.goal}
+    ];
+    for(const stage of stages){
+      const listItems=items.filter(stage.matches).sort((a,b)=>priorities[a.priority].rank-priorities[b.priority].rank||b.updatedAt.localeCompare(a.updatedAt));
+      const lane=el("section","quest-lane");lane.dataset.stage=stage.id;
+      const heading=el("div","quest-lane-head");heading.append(el("h3","",stage.title),el("span","",listItems.length));lane.append(heading);
+      if(!listItems.length)lane.append(el("p","quest-lane-empty","Nenhuma missão nesta etapa."));
+      for(const item of listItems.slice(0,20)){
+        const box=el("article","quest-mini");box.dataset.id=item.id;
+        box.append(el("strong","quest-mini-title",item.title));
+        const percentage=Math.round(item.progress/item.goal*100);
+        const meta=el("div","quest-mini-meta");meta.append(el("span","",item.progress+" / "+item.goal),el("span","",percentage+"%"));box.append(meta);
+        const meter=el("progress","quest-mini-progress");meter.max=item.goal;meter.value=item.progress;meter.setAttribute("aria-label","Missão "+item.title);box.append(meter);
+        if(item.progress<item.goal){const b=el("button","quest-advance","+1 nesta missão");b.type="button";b.dataset.questAction="advance";b.dataset.id=item.id;box.append(b);}
+        lane.append(box);
+      }
+      if(listItems.length>20)lane.append(el("p","quest-lane-empty","Exibidas as primeiras 20 missões desta etapa."));
+      target.append(lane);
+    }
+  }
   function render(){
     const sorted=[...items].sort((a,b)=>priorities[a.priority].rank-priorities[b.priority].rank||Date.parse(b.updatedAt)-Date.parse(a.updatedAt));
     const visible=sorted.filter(item=>filter==="all"||(filter==="done"?item.progress>=item.goal:item.progress<item.goal));
     list.replaceChildren(...visible.map(card));
+    renderQuestMap();
     $("#empty").hidden=items.length>0;
     $("#stat-total").textContent=items.length;
     $("#stat-done").textContent=items.filter(item=>item.progress>=item.goal).length;
@@ -100,6 +126,12 @@
     save();render();
   });
   document.querySelectorAll("[data-filter]").forEach(control=>control.addEventListener("click",()=>{filter=control.dataset.filter;render()}));
+  $("#quest-map").addEventListener("click",event=>{
+    const btn=event.target.closest("button[data-quest-action]");if(!btn)return;
+    const item=items.find(item=>item.id===btn.dataset.id);if(!item||item.progress>=item.goal)return;
+    item.progress++;item.updatedAt=new Date().toISOString();save();render();
+    notify(item.progress>=item.goal?"Missão concluída no mapa!":"Avanço da missão registrado.");
+  });
   $("#load-demo").addEventListener("click",()=>{
     if(items.length&&!confirm("Substituir seus desafios pelos exemplos?"))return;
     const timestamp=new Date().toISOString();
