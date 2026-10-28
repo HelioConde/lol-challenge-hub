@@ -35,3 +35,6 @@ Inspecionadas capturas reais do Playwright em 320 e 390 px; link de pular conte�
 
 ## QA de teclado, contraste e formulários (28/10/2026)
 Testes diretos no Chrome/Playwright de Tab/Shift+Tab, foco visível, acesso rápido ao conteúdo, rótulos dos campos, contraste dos campos e placeholders (alvo 4,5:1), e altura mínima de 44px em navegação, formulários e ações principais. CSS específico em `a11y.css`; preservados design próprio, CRUD, backups e armazenamento. Esta é uma checagem automatizada direcionada, não certificação WCAG integral.
+
+## Menu móvel nativo (28/10/2026)
+Header com navegação acessível por `details/summary` em até 640 px, sem necessidade de framework. Atalhos: Mapa de missões, Meus desafios, Criar missão. Abre com Enter, fecha com Escape, clique em link e clique fora. Desativa na largura desktop. Mantém backup e funcionalidades. Playwright verifica o menu em cinco larguras, navegação e fechamento.

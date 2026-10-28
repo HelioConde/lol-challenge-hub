@@ -22,6 +22,22 @@ const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
     if(response.status()!==200)errors.push("Home HTTP "+response.status());
     await page.getByRole("heading",{name:/Toda conquista começa/}).waitFor();
     await auditAccessibility(page,errors);
+    // Functional native mobile navigation, including keyboard and closing behavior.
+    const mobileMenu=page.locator("header details.mobile-nav");
+    if(page.viewportSize().width<=640){
+      if(!await mobileMenu.isVisible())errors.push("Mobile menu hidden");
+      const trigger=mobileMenu.locator("summary");await trigger.focus();await page.keyboard.press("Enter");
+      if(!await mobileMenu.evaluate(el=>el.open))errors.push("Enter did not open menu");
+      if(await mobileMenu.locator("nav a").count()!==3)errors.push("Mobile menu missing three links");
+      await page.keyboard.press("Escape");
+      if(await mobileMenu.evaluate(el=>el.open))errors.push("Escape did not close menu");
+      await trigger.click();
+      const first=mobileMenu.locator("nav a").first();const dest=await first.getAttribute("href");
+      await first.click();
+      if(await mobileMenu.evaluate(el=>el.open))errors.push("Menu stayed open after selecting destination");
+      if(await page.evaluate(()=>location.hash)!==dest)errors.push("Mobile menu link failed to navigate");
+    }else if(await mobileMenu.isVisible())errors.push("Mobile navigation visible on desktop");
+
     // Keyboard-only skip link must remain visually clipped when not focused, then reveal on focus.
     const skip=page.locator("a.skip,a.skip-link");
     if(await skip.count()!==1)errors.push("Missing unique keyboard skip link");
