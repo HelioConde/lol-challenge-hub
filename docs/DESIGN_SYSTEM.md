@@ -26,3 +26,6 @@ Referência visual é a linguagem temática de desafios de jogos, com emblema or
 
 ## Diferenciação visual — 27/10/2026
 **Layout original do produto, não tema copiado.** Quadro de missões RPG: pergaminho, fichas de conquista, cartões quest e painel de inscrição. O arquivo `identity.css` contém a identidade sem alterar armazenamento ou componentes funcionais. Resoluções críticas: 320, 390, 768, 1366 e 1600 pixels. Contraste/foco mantidos e movimento reduzido respeitado.
+
+## Mapa de missões — funcionalidade única
+Três etapas calculadas diretamente das metas locais: **A iniciar** (progresso 0), **Em jornada** (progresso entre 1 e meta-1), **Conquistas** (meta atingida). Os cartões contêm medidor e botão de incremento manual que atualiza a mesma informação dos desafios detalhados, sem mudar o schema de backup JSON. O mapa não utiliza dados Riot. QA testa sincronização e persistência do +1 após reload.
