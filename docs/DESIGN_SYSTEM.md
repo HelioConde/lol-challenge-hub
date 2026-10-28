@@ -29,3 +29,6 @@ Referência visual é a linguagem temática de desafios de jogos, com emblema or
 
 ## Mapa de missões — funcionalidade única
 Três etapas calculadas diretamente das metas locais: **A iniciar** (progresso 0), **Em jornada** (progresso entre 1 e meta-1), **Conquistas** (meta atingida). Os cartões contêm medidor e botão de incremento manual que atualiza a mesma informação dos desafios detalhados, sem mudar o schema de backup JSON. O mapa não utiliza dados Riot. QA testa sincronização e persistência do +1 após reload.
+
+## Auditoria visual de screenshots (28/10/2026)
+Inspecionadas capturas reais do Playwright em 320 e 390 px; link de pular conteúdo agora recortado por `clip-path` fora do foco, revelado no foco de teclado. Hero mobile compactado sem remover CTA ou funções. QA acrescenta teste de acesso por foco ao skip link e mantém verificação de overflow e operações locais.
