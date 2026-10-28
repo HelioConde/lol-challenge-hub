@@ -32,3 +32,6 @@ Três etapas calculadas diretamente das metas locais: **A iniciar** (progresso 0
 
 ## Auditoria visual de screenshots (28/10/2026)
 Inspecionadas capturas reais do Playwright em 320 e 390 px; link de pular conteúdo agora recortado por `clip-path` fora do foco, revelado no foco de teclado. Hero mobile compactado sem remover CTA ou funções. QA acrescenta teste de acesso por foco ao skip link e mantém verificação de overflow e operações locais.
+
+## QA de teclado, contraste e formulários (28/10/2026)
+Testes diretos no Chrome/Playwright de Tab/Shift+Tab, foco visível, acesso rápido ao conteúdo, rótulos dos campos, contraste dos campos e placeholders (alvo 4,5:1), e altura mínima de 44px em navegação, formulários e ações principais. CSS específico em `a11y.css`; preservados design próprio, CRUD, backups e armazenamento. Esta é uma checagem automatizada direcionada, não certificação WCAG integral.
