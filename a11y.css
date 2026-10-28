@@ -1,0 +1,11 @@
+/* Product-specific accessible controls; no database or app logic changes. */
+:root{--a11y-focus:#146a7a;--a11y-placeholder:#51483f}
+:where(a,button,input,select,textarea,summary):focus-visible{outline:3px solid var(--a11y-focus)!important;outline-offset:3px!important}
+:where(button,a.button,.hero-buttons a,header nav a,header .nav-links a){min-height:44px}
+header nav a,header .nav-links a{display:inline-flex;align-items:center}
+form :is(input:not([type="hidden"]):not([type="file"]),select,textarea){min-height:44px;font-size:16px}
+form :is(input,textarea)::placeholder{color:var(--a11y-placeholder);opacity:1}
+form :is(input,select,textarea){max-width:100%}
+form :is(.field,.input-group){min-width:0}
+main:focus{outline:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}

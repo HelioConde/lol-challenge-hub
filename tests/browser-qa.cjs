@@ -1,4 +1,5 @@
 "use strict";
+const auditAccessibility=require("./accessibility-audit.cjs");
 const { chromium }=require("playwright");
 const { spawn }=require("node:child_process");
 const fs=require("node:fs");
@@ -20,6 +21,7 @@ const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
     const response=await page.goto("http://127.0.0.1:8769/",{waitUntil:"load"});
     if(response.status()!==200)errors.push("Home HTTP "+response.status());
     await page.getByRole("heading",{name:/Toda conquista começa/}).waitFor();
+    await auditAccessibility(page,errors);
     // Keyboard-only skip link must remain visually clipped when not focused, then reveal on focus.
     const skip=page.locator("a.skip,a.skip-link");
     if(await skip.count()!==1)errors.push("Missing unique keyboard skip link");
