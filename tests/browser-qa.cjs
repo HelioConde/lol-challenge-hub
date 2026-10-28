@@ -22,6 +22,18 @@ const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
     if(response.status()!==200)errors.push("Home HTTP "+response.status());
     await page.getByRole("heading",{name:/Toda conquista começa/}).waitFor();
     await auditAccessibility(page,errors);
+    const desktopNav=page.locator("header nav:not(.mobile-nav-panel)").first();
+    const desktopLinks=desktopNav.locator('a[href^="#"]');
+    if(await desktopLinks.count()!==3)errors.push("Desktop navigation must expose three product shortcuts");
+    for(const link of await desktopLinks.all()){
+      const id=(await link.getAttribute("href")).slice(1);
+      if(await page.locator('[id="'+id+'"]').count()!==1)errors.push("Desktop link has missing/duplicate target #"+id);
+    }
+    if(page.viewportSize().width>640){
+      if(!await desktopNav.isVisible())errors.push("Desktop navigation hidden");
+      else{const to=await desktopLinks.first().getAttribute("href");await desktopLinks.first().click();if(await page.evaluate(()=>location.hash)!==to)errors.push("Desktop link did not navigate");}
+    }else if(await desktopNav.isVisible())errors.push("Desktop navigation visible on mobile");
+
     // Functional native mobile navigation, including keyboard and closing behavior.
     const mobileMenu=page.locator("header details.mobile-nav");
     if(page.viewportSize().width<=640){
