@@ -23,3 +23,6 @@ Referência visual é a linguagem temática de desafios de jogos, com emblema or
 
 ## Testes
 `tests/static-qa.cjs` verifica estrutura e não dependência do backend. `tests/browser-qa.cjs` testa fluxos criar, avançar, filtrar, reload, excluir, JSON, erros e overflow com Chromium, salvando screenshots completos em 5 viewports.
+
+## Diferenciação visual — 27/10/2026
+**Layout original do produto, não tema copiado.** Quadro de missões RPG: pergaminho, fichas de conquista, cartões quest e painel de inscrição. O arquivo `identity.css` contém a identidade sem alterar armazenamento ou componentes funcionais. Resoluções críticas: 320, 390, 768, 1366 e 1600 pixels. Contraste/foco mantidos e movimento reduzido respeitado.
